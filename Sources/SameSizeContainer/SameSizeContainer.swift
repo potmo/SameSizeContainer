@@ -23,7 +23,7 @@ public struct SameSize<Content: View>: View {
     private var content: () -> Content
     private let alignment: Alignment
     
-    init(group: SizeGroup, alignment: Alignment = .center, @ViewBuilder content: @escaping ()-> Content) {
+    public init(group: SizeGroup, alignment: Alignment = .center, @ViewBuilder content: @escaping ()-> Content) {
         self.group = group
         self.content = content
         self.alignment = alignment
