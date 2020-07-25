@@ -3,6 +3,8 @@
 Make sure that views are the same width, height or both to allow for e.g. multi column text alignment.
 They work in different part of the view hierarchy as long as they are all on screen at the same time
 
+![Screenshot](/screenshot.png)
+
 usage:
 ```swift
 import SwiftUI
