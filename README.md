@@ -11,49 +11,74 @@ import SameSizeContainer
 struct SomeView: View {
     
     // setup the groups. All views with the same group will have the same sizes
-    @State private static let GROUP_BOTH_WIDTH_AND_HEIGHT = SizeGroup()
-    @State private static let GROUP_ONLY_WIDTH = SizeGroup(resizing: .width)
-    @State private static let GROUP_ONLY_HEIGHT = SizeGroup(resizing: .height)
 
+    @State private var TITLE_GROUP = SizeGroup(resizing: .width)
+    @State private var ELEMENT_GROUP = SizeGroup(resizing: .both)
+    
     var body: some View {
-    // The views in GROUP_BOTH_WIDTH_AND_HEIGHT has `.both` resizing so they will have the same width and height
-        SameSize(group: Self.GROUP_BOTH_WIDTH_AND_HEIGHT) {
-            Text("Short")
+        HStack {
+            VStack {
+                SameSize(group: TITLE_GROUP, alignment: .trailing) {
+                    Text("One thing")
+                        .background(Color.purple.opacity(0.2))
+                }
+                .border(Color.blue, width: 1)
+                
+                SameSize(group: TITLE_GROUP, alignment: .trailing) {
+                    Text("Other thing")
+                        .background(Color.purple.opacity(0.2))
+                }
+                .border(Color.blue, width: 1)
+                
+                SameSize(group: TITLE_GROUP, alignment: .trailing) {
+                    Text("A Third thing")
+                        .background(Color.purple.opacity(0.2))
+                }
+                .border(Color.blue, width: 1)
+            }
+            .border(Color.red, width: 1)
+            .padding()
+            
+            VStack(alignment: .leading) {
+                Text("This is not in a group")
+                Text("This is not either")
+                Text("And not this")
+            }
+            .border(Color.red, width: 1)
+            .padding()
+            
+            VStack(alignment: .leading) {
+                SameSize(group: ELEMENT_GROUP, alignment: .topLeading) {
+                    Text("A Short")
+                        .background(Color.purple.opacity(0.2))
+                }
+                .border(Color.blue, width: 1)
+                
+                SameSize(group: ELEMENT_GROUP, alignment: .topLeading) {
+                    Text("A Longer one")
+                        .background(Color.purple.opacity(0.2))
+                }
+                .border(Color.blue, width: 1)
+                
+                SameSize(group: ELEMENT_GROUP, alignment: .topLeading) {
+                    Text("Another one\nthat is multiline so it makes all be taller")
+                        .background(Color.purple.opacity(0.2))
+                }
+                .border(Color.blue, width: 1)
+                
+            }
+            .border(Color.red, width: 1)
+            .padding()
         }
+        .border(Color.green, width: 1)
+        .padding()
         
-        SameSize(group: Self.GROUP_BOTH_WIDTH_AND_HEIGHT) {
-            Text("Very very long compared")
-        }
-        
-        SameSize(group: Self.GROUP_BOTH_WIDTH_AND_HEIGHT) {
-            Text("Two\nlines")
-        }
-        
-        // These views will only have the same width, the height is dynamic as to the content
-        SameSize(group: Self.GROUP_ONLY_WIDTH) {
-            Text("Short")
-        }
-        
-        SameSize(group: Self.GROUP_ONLY_WIDTH) {
-            Text("Very long compared")
-        }
-        
-        SameSize(group: Self.GROUP_ONLY_WIDTH) {
-            Text("Line one\nLine two\nLine three")
-        }
-        
-        // these view will have the same height but the width is dynamic
-        SameSize(group: Self.GROUP_ONLY_HEIGHT) {
-            Text("Short")
-        }
-        
-        SameSize(group: Self.GROUP_ONLY_HEIGHT, alignment: .topLeading) {
-            Text("A bit longer")
-        }
-        
-        SameSize(group: Self.GROUP_ONLY_HEIGHT) {
-            Text("Two\nlines")
-        }
+    }
+}
+
+struct SameSizeExample_Previews: PreviewProvider {
+    static var previews: some View {
+        SomeView()
     }
 }
 ```
