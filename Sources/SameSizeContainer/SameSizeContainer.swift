@@ -39,7 +39,7 @@ public struct SameSize<Content: View>: View {
     }
     
     @ViewBuilder
-    var body: some View {
+    public var body: some View {
         ZStack(alignment: self.alignment) {
             Rectangle()
                 .frame(width: self.group.size.width, height: self.group.size.height)
@@ -77,7 +77,7 @@ public struct SameSize<Content: View>: View {
     }
 }
 
-class SizeGroup: ObservableObject {
+public class SizeGroup: ObservableObject {
     
     static var sizes: [UUID: [UUID: CGSize]] = [:]
     
@@ -86,7 +86,7 @@ class SizeGroup: ObservableObject {
     fileprivate let id: UUID
     fileprivate let resizing: Resizing
     
-    init(resizing: Resizing = .both) {
+    public init(resizing: Resizing = .both) {
         let id = UUID()
         self.id = id
         self.resizing = resizing
@@ -98,7 +98,7 @@ class SizeGroup: ObservableObject {
         SizeGroup.sizes.removeValue(forKey: id)
     }
     
-    enum Resizing {
+    public enum Resizing {
         case height
         case width
         case both
