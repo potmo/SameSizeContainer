@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "SameSizeContainer",
-    //platforms: [.macOS(.v10_15)],
+    platforms: [.macOS(.v10_15), .iOS(.v12)],
     products: [
         .library(
             name: "SameSizeContainer",
